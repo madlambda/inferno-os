@@ -5,6 +5,7 @@
 #include	<winsock.h>
 #undef Unknown
 #include	<excpt.h>
+#include	<fenv.h>
 #include	"dat.h"
 #include	"fns.h"
 #include	"error.h"
@@ -289,8 +290,8 @@ TrapHandler(LPEXCEPTION_POINTERS ureg)
 	case EXCEPTION_FLT_STACK_CHECK:
 	case EXCEPTION_FLT_UNDERFLOW:
 		/* clear exception flags and ensure safe empty state */
-		_asm { fnclex };
-		_asm { fninit };
+		feclearexcept(FE_ALL_EXCEPT);
+		fesetenv(FE_DFL_ENV);
 	}
 	disfault(nil, name);
 	/* not reached */
@@ -394,25 +395,26 @@ libinit(char *imod)
 	emuinit(imod);
 }
 
-void
-FPsave(void *fptr)
-{
-	_asm {
-		mov	eax, fptr
-		fstenv	[eax]
-	}
-}
+//void
+//FPsave(void *fptr)
+//{
+//	fesetenv()
+//	_asm {
+///		mov	eax, fptr
+//		fstenv	[eax]
+//	}
+//}
 
-void
-FPrestore(void *fptr)
-{
-	_asm {
-		mov	eax, fptr
-		fldenv	[eax]
-	}
-}
+//void
+//FPrestore(void *fptr)
+//{
+//	_asm {
+//		mov	eax, fptr
+////		fldenv	[eax]
+//}
+//}
 
-ulong
+/*ulong
 umult(ulong a, ulong b, ulong *high)
 {
 	ulong lo, hi;
@@ -426,7 +428,7 @@ umult(ulong a, ulong b, ulong *high)
 	}
 	*high = hi;
 	return lo;
-}
+}*/
 
 int
 close(int fd)
@@ -520,6 +522,7 @@ sbrk(int size)
 	return brk;
 }
 
+/*
 ulong
 getcallerpc(void *arg)
 {
@@ -531,7 +534,7 @@ getcallerpc(void *arg)
 	}
 	return cpc;
 }
-
+*/
 /*
  * Return an abitrary millisecond clock time
  */

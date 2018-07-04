@@ -5,6 +5,6 @@ TARGFILES=\
 	getuser-Nt.$O\
 	getwd-Nt.$O\
 	setbinmode-Nt.$O\
-	lock-Nt-386.$O\
+	lock-Nt-$OBJTYPE.$O\
 	pread-Nt.$O\
 	isnan-posix.$O\

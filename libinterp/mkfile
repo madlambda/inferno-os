@@ -4,7 +4,7 @@ LIB=libinterp.a
 
 OFILES=\
 	alt.$O\
-	comp-$OBJTYPE.$O\
+	#comp-$OBJTYPE.$O\
 	conv.$O\
 	crypt.$O\
 	dec.$O\

@@ -1,0 +1,51 @@
+TARGMODEL=	Nt
+TARGSHTYPE=	rc
+CPUS=		amd64
+
+O=		obj
+OS=		obj
+
+AR=		LIB
+ARFLAGS=	-nologo
+ARPREFIX=	-out:
+
+NTINCLUDES=	'-IC:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.14.26428\ATLMFC\include' \
+			'-IC:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.14.26428\include'\
+			'-IC:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\ucrt'\
+			'-IC:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\shared'\
+			'-IC:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\um'\
+			'-IC:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\winrt'\
+			'-IC:\Program Files (x86)\Windows Kits\10\include\10.0.17134.0\cppwinrt'
+
+NTLIBPATH=	'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.14.26428\ATLMFC\lib\x86;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.14.26428\lib\x86;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.14.26428\lib\x86\store\references;C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17134.0;C:\Program Files (x86)\Windows Kits\10\References\10.0.17134.0;C:\Windows\Microsoft.NET\Framework\v4.0.30319;'
+AS=		ml
+ASFLAGS=	-c\
+		-nologo\
+		-coff\
+		-Cx\
+		-Zm\
+		-DQUIET\
+		-Damd64\
+
+CC=		cl
+CFLAGS=		-c\
+		-nologo\
+		-W3\
+		-Zi\
+		-MT\
+		-D_WIN32_WINNT=0x0A00\
+		-I$ROOT/Nt/amd64/include\
+		-I$ROOT/include\
+		$NTINCLUDES\
+		$XCFLAGS\
+
+ANSICPP=
+LD=		link
+LDFLAGS=	$LDEBUG '/LIBPATH:C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17134.0\um\x64' \
+				'/LIBPATH:C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17134.0\ucrt\x64' -nologo -incremental:no -map
+# LDFLAGS=	-nologo -incremental:no -debug
+
+SYSLIBS=	binmode.obj
+
+YACC=		iyacc
+YFLAGS=		-d
