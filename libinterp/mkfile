@@ -4,7 +4,6 @@ LIB=libinterp.a
 
 OFILES=\
 	alt.$O\
-	#comp-$OBJTYPE.$O\
 	conv.$O\
 	crypt.$O\
 	dec.$O\
@@ -29,7 +28,7 @@ OFILES=\
 	tk.$O\
 	validstk.$O\
 	xec.$O\
-	das-$OBJTYPE.$O\
+#	das-$OBJTYPE.$O\
 	keyring.$O\
 	string.$O\
 
